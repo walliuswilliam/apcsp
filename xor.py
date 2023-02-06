@@ -61,28 +61,31 @@ def xoronsentence(word, key):
 
 
 #DNA Project
-rule1 = ['C', 'T', 'A', 'G']
+
+rule_list = [['C', 'G', 'A', 'T'], ['G', 'C', 'A', 'T'], ['C', 'G', 'T', 'A'], ['G', 'C', 'T', 'A'], ['A', 'T', 'G', 'C'], ['T', 'A', 'G', 'C'], ['A', 'T', 'C', 'G'], ['T', 'A', 'C', 'G']]
+rules = {i:val for i, val in enumerate(rule_list)}
 
 
-def encodeDNA(character):
-    charIndex = rule1.index(character)
+def encodeDNA(character, rule=0):
+    charIndex = rules[rule].index(character)
     return '{0:02b}'.format(charIndex)
 
-def decodeDNA(binary):
+def decodeDNA(binary, rule=0):
     charIndex = int(binary, 2)
-    return rule1[charIndex]
+    return rules[rule][charIndex]
 
-def XOR_DNA(plainDNA, keyDNA):
+def XOR_DNA(plainDNA, keyDNA, rule=0):
     message = ''
     for i in range(len(plainDNA)):
-        message += decodeDNA(xorbyte(str(encodeDNA(plainDNA[i])), str(encodeDNA(keyDNA[i%len(keyDNA)]))))
+        message += decodeDNA(xorbyte(str(encodeDNA(plainDNA[i], rule)), str(encodeDNA(keyDNA[i%len(keyDNA)], rule))))
     return message
 
 print(XOR_DNA('A', 'C')) #10 = A
 print(XOR_DNA('C', 'G')) #11 = G
 print(XOR_DNA('G', 'T')) #10 = A
 print(XOR_DNA('T', 'A')) #11 = G
-
-# MODIFY THE METHODS SO THAT USERS CAN CHOOSE FROM THE EIGHT POSSIBLE DNA RULES
-# TRY TO FIGURE OUT THE RULES YOURSELF FIRST! IF YOU GET STUCK COME ASK ME :)
-# REMEMBER WATSON CRICK SAYS A PAIRS WITH T & G PAIRS WITH C
+print()
+print(XOR_DNA('A', 'C', 1))
+print(XOR_DNA('C', 'G', 2))
+print(XOR_DNA('G', 'T', 6))
+print(XOR_DNA('T', 'A', 7))
