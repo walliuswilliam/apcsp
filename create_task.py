@@ -54,7 +54,7 @@ while choice != 'e':
         if len(squares.keys()) == 0:
             print('There are no saved punnett squares.')
         else:
-            square = input(f'What square would you like to view?\n{list(squares.keys())}\n')
+            square = input(f'Enter the name of the square you like to view:\n{list(squares.keys())}\n')
             if square in squares.keys():
                 print(squares[square], '\n')
             else:
