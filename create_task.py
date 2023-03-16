@@ -31,35 +31,37 @@ def create_punnett_square(parent_1, parent_2):
 
     return square_str
 
+def run_punnett_square_library(choice):
+    while choice != 'e':
+        if choice == 'n':
+            parent_1 = input("What are the alleles of parent 1?\n")
+            parent_2 = input("What are the alleles of parent 2?\n")
+            punnett_square = create_punnett_square(parent_1, parent_2)
+
+            save = input('Would you like to save this square (y/n)? ').lower()
+            while save not in ['y','n']:
+                print('Invalid choice')
+                save = input('Would you like to save this square (y/n)? ').lower()
+            
+            if save == 'y':
+                name = input('What would you like to name your punnett square? ')
+                squares[name] = punnett_square
+
+        elif choice == 'v':
+            if len(squares.keys()) == 0:
+                print('There are no saved punnett squares.')
+            else:
+                square = input(f'Enter the name of the square you like to view:\n{list(squares.keys())}\n')
+                if square in squares.keys():
+                    print(squares[square], '\n')
+                else:
+                    print('Square does not exist')
+        
+        choice = input('Would you like to create a (n)ew punnett square, (v)iew existing punnett squares, or (e)xit? ').lower()
+
 
 squares = {}
+print('Welcome to the Punnett Square Library!')
 choice = input('Would you like to create a (n)ew punnett square, (v)iew existing punnett squares, or (e)xit? ').lower()
-
-while choice != 'e':
-    if choice == 'n':
-        parent_1 = input("What are the alleles of parent 1?\n")
-        parent_2 = input("What are the alleles of parent 2?\n")
-        punnett_square = create_punnett_square(parent_1, parent_2)
-
-        save = input('Would you like to save this square (y/n)? ').lower()
-        while save not in ['y','n']:
-            print('Invalid choice')
-            save = input('Would you like to save this square (y/n)? ').lower()
-        
-        if save == 'y':
-            name = input('What would you like to name your punnett square? ')
-            squares[name] = punnett_square
-
-    elif choice == 'v':
-        if len(squares.keys()) == 0:
-            print('There are no saved punnett squares.')
-        else:
-            square = input(f'Enter the name of the square you like to view:\n{list(squares.keys())}\n')
-            if square in squares.keys():
-                print(squares[square], '\n')
-            else:
-                print('Square does not exist')
-    
-    choice = input('Would you like to create a (n)ew punnett square, (v)iew existing punnett squares, or (e)xit? ').lower()
-
+run_punnett_square_library(choice)
 print('Have a good day! Goodbye.')
