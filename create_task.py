@@ -39,10 +39,6 @@ def run_punnett_square_library(choice):
             punnett_square = create_punnett_square(parent_1, parent_2)
 
             save = input('Would you like to save this square (y/n)? ').lower()
-            while save not in ['y','n']:
-                print('Invalid choice')
-                save = input('Would you like to save this square (y/n)? ').lower()
-            
             if save == 'y':
                 name = input('What would you like to name your punnett square? ')
                 squares[name] = punnett_square
