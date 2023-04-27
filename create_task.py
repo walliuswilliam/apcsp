@@ -1,4 +1,7 @@
-def create_punnett_square(parent_1, parent_2):
+def create_punnett_square():
+    parent_1 = input("What are the alleles of parent 1?\n")
+    parent_2 = input("What are the alleles of parent 2?\n")
+    
     p1_cases = [parent_1.istitle(), parent_1.islower(), parent_1.isupper()]
 
     while not any(p1_cases) or not parent_1.isalpha() or len(parent_1) != 2:
@@ -34,9 +37,7 @@ def create_punnett_square(parent_1, parent_2):
 def run_punnett_square_library(choice):
     while choice != 'e':
         if choice == 'n':
-            parent_1 = input("What are the alleles of parent 1?\n")
-            parent_2 = input("What are the alleles of parent 2?\n")
-            punnett_square = create_punnett_square(parent_1, parent_2)
+            punnett_square = create_punnett_square()
 
             save = input('Would you like to save this square (y/n)? ').lower()
             if save == 'y':
